@@ -6,3 +6,13 @@ Date de présentation :
 
 Diagramme de classe à rendre:
 22/05/2014 à 18h version papier à déposer dans le casier du prof.
+======================================================================
+QUESTIONS A POSER:
+regroupement des MVC dans des packages
+
+
+=============================================================================
+RESTE A FAIRE :
+
+phase de tests
+Ergonomie : ajouter bouton annuler/refaire
