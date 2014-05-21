@@ -1,5 +1,3 @@
-import java.util.Observable;
-
 //Types de classes développées par Arthur
 public class Cercle extends FigureGeom{
 	int taille;

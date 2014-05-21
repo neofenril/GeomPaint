@@ -1,6 +1,6 @@
 import java.util.Observable;
 
 
-public abstract class FigureGeom  extends Observable{
+public abstract class FigureGeom extends Observable{
 
 }
