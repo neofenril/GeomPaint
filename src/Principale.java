@@ -20,8 +20,6 @@ public class Principale{
 	    ImageIcon yourImage = new ImageIcon("image/images.jpg");
 	    Image image = yourImage.getImage();
 	    fenetre.setIconImage(image);
-	    MenuBar mb = new MenuBar();
-	    fenetre.setMenuBar(mb);
 	    GeomPaint dessin = new GeomPaint();
 	    dessin.setPreferredSize(new Dimension(710,500));
 	    fenetre.setContentPane(dessin);

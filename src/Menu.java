@@ -66,7 +66,7 @@ public class Menu extends JPanel {
 	
 		bouton[6]=(Bouton)this.add(new Bouton(new ImageIcon("image/move-cursor.jpg"), "Move"));
 		bouton[6].setBackground(new Color(255, 255, 255));
-		bouton[6].setToolTipText("Deplacer");
+		bouton[6].setToolTipText("Déplacer");
 		
 		bouton[7]=(Bouton)this.add(new Bouton(new ImageIcon("image/Cursor_Hand.png"), "Resize"));
 		bouton[7].setBackground(new Color(255, 255, 255));
@@ -171,5 +171,21 @@ public class Menu extends JPanel {
 	
 	public boolean getRedim(){
 		return redim;
+	}
+	
+	public Bouton getBouton(){
+		return bouton[9];
+	}
+	
+	public void setBackgroundBouton9(Color c){
+		bouton[9].setBackground(c);
+	}
+	
+	public Color getCouleur(){
+		return couleur;
+	}
+	
+	public void setCouleur(Color c){
+		couleur = c;
 	}
 }

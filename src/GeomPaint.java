@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -9,12 +11,35 @@ public class GeomPaint extends JPanel {
 	private final Plateau plateau;
 	private final Menu menu;
 	
+	 private JPopupMenu jpm = new JPopupMenu();
+	  private JMenu couleur = new JMenu("Couleur");
+
+	  private JMenuItem effacer = new JMenuItem("Effacer");      
 	
 	public GeomPaint(){
 		menu = new Menu();
 		plateau = new Plateau(menu);
 		
-	
+		plateau.addMouseListener(new MouseAdapter(){
+		      public void mouseReleased(MouseEvent event){
+		        if(event.isPopupTrigger()){
+		          MouseAdapter actionListener = new java.awt.event.MouseAdapter() {
+		              public void mouseClicked(java.awt.event.MouseEvent evt) {
+		                  Color background = JColorChooser.showDialog(null,"Changer de Couleur", null);
+		                  if (background != null) {
+		                	menu.setBackgroundBouton9(background);
+		                	menu.setCouleur(background);
+		                  }
+		              }
+		          };
+		          
+		          couleur.addMouseListener(actionListener);
+		          jpm.add(effacer);
+		          jpm.add(couleur);
+		          jpm.show(plateau, event.getX(), event.getY());
+		        }
+		      }
+		    });
 		this.add(menu, BorderLayout.NORTH);
 		this.add(plateau);
 	}	
