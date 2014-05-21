@@ -13,10 +13,10 @@ public class GeomPaint extends JPanel {
 	private final Plateau plateau;
 	private final Menu menu;
 	
-	 private JPopupMenu jpm = new JPopupMenu();
-	  private JMenu couleur = new JMenu("Couleur");
+	private JPopupMenu jpm = new JPopupMenu();
+	private JMenu couleur = new JMenu("Couleur");
 
-	  private JMenuItem effacer = new JMenuItem("Effacer");      
+	private JMenuItem effacer = new JMenuItem("Effacer");      
 	
 	public GeomPaint(Object o){
 		Dessin=new ArrayList();

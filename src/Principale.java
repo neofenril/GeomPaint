@@ -19,7 +19,7 @@ public class Principale{
 		JFrame fenetre = new JFrame("GeomPaint");
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    fenetre.setResizable(false);
-	    ImageIcon yourImage = new ImageIcon("image/images.jpg");
+	    ImageIcon yourImage = new ImageIcon("../image/images.jpg");
 	    Image image = yourImage.getImage();
 	    fenetre.setIconImage(image);
 	    Object o = new Object();

@@ -2,29 +2,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Label;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.Border;
-
 
 public class Menu extends JPanel {
 	private Bouton[] bouton = new Bouton[tailleMenu];
@@ -40,35 +24,35 @@ public class Menu extends JPanel {
 		setLayout(new GridLayout(1, 10, 39, 5));
 		
 		// Boutons selectionnant le forme a dessiner
-		bouton[0]=(Bouton)this.add(new Bouton(new ImageIcon("image/retour.png"), "Retour"));
+		bouton[0]=(Bouton)this.add(new Bouton(new ImageIcon("../image/retour.png"), "Retour"));
 		bouton[0].setBackground(new Color(255, 255, 255));
 		bouton[0].setToolTipText("Retour");
 		
-		bouton[1]=(Bouton)this.add(new Bouton(new ImageIcon("image/avance.png"), "Refaire"));
+		bouton[1]=(Bouton)this.add(new Bouton(new ImageIcon("../image/avance.png"), "Refaire"));
 		bouton[1].setBackground(new Color(255, 255, 255));
 		bouton[1].setToolTipText("Refaire");
 		
-		bouton[2]=(Bouton)this.add(new Bouton(new ImageIcon("image/Rectangle.png"), "Rectangle"));
+		bouton[2]=(Bouton)this.add(new Bouton(new ImageIcon("../image/Rectangle.png"), "Rectangle"));
 		bouton[2].setBackground(new Color(255, 255, 255));
 		bouton[2].setToolTipText("Dessiner un Rectangle");
 		
-		bouton[3]=(Bouton)this.add(new Bouton(new ImageIcon("image/Cercle.png"), "Cercle"));
+		bouton[3]=(Bouton)this.add(new Bouton(new ImageIcon("../image/Cercle.png"), "Cercle"));
 		bouton[3].setBackground(new Color(255, 255, 255));
 		bouton[3].setToolTipText("Dessiner un Cercle");
 
-		bouton[4]=(Bouton)this.add(new Bouton(new ImageIcon("image/Triangle.png"), "Triangle"));
+		bouton[4]=(Bouton)this.add(new Bouton(new ImageIcon("../image/Triangle.png"), "Triangle"));
 		bouton[4].setBackground(new Color(255, 255, 255));
 		bouton[4].setToolTipText("Dessiner un Triangle");
 
-		bouton[5]=(Bouton)this.add(new Bouton(new ImageIcon("image/Poligone.png"), "Polygone"));
+		bouton[5]=(Bouton)this.add(new Bouton(new ImageIcon("../image/Poligone.png"), "Polygone"));
 		bouton[5].setBackground(new Color(255, 255, 255));
 		bouton[5].setToolTipText("Dessiner un Polygone");
 	
-		bouton[6]=(Bouton)this.add(new Bouton(new ImageIcon("image/move-cursor.jpg"), "Move"));
+		bouton[6]=(Bouton)this.add(new Bouton(new ImageIcon("../image/move-cursor.jpg"), "Move"));
 		bouton[6].setBackground(new Color(255, 255, 255));
-		bouton[6].setToolTipText("Déplacer");
+		bouton[6].setToolTipText("Deplacer");
 		
-		bouton[7]=(Bouton)this.add(new Bouton(new ImageIcon("image/Cursor_Hand.png"), "Resize"));
+		bouton[7]=(Bouton)this.add(new Bouton(new ImageIcon("../image/Cursor_Hand.png"), "Resize"));
 		bouton[7].setBackground(new Color(255, 255, 255));
 		bouton[7].setToolTipText("Redimensionner");
 		
