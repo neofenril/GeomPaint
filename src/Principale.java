@@ -20,7 +20,8 @@ public class Principale{
 	    ImageIcon yourImage = new ImageIcon("image/images.jpg");
 	    Image image = yourImage.getImage();
 	    fenetre.setIconImage(image);
-	    GeomPaint dessin = new GeomPaint();
+	    Object o = new Object();
+	    GeomPaint dessin = new GeomPaint(o);
 	    dessin.setPreferredSize(new Dimension(710,500));
 	    fenetre.setContentPane(dessin);
 	    fenetre.pack();
