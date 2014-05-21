@@ -37,7 +37,7 @@ public class GeomPaint extends JPanel {
 		                  }
 		              }
 		          };
-		          
+		  		  System.out.print("mouse released GeomPaint");
 		          couleur.addMouseListener(actionListener);
 		          jpm.add(effacer);
 		          jpm.add(couleur);

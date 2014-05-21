@@ -7,11 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Plateau extends JPanel implements MouseListener, MouseMotionListener{
+public class Plateau extends JPanel implements Observer, MouseListener, MouseMotionListener{
 	private final static int MAXTAILLE=10000;	
 	private Menu menu;
     private int x,y;
@@ -29,6 +31,10 @@ public class Plateau extends JPanel implements MouseListener, MouseMotionListene
 		menu = m;
 		addMouseListener(this);
     	addMouseMotionListener(this);
+	}
+	
+	public void update(Observable arg0, Object o){
+		
 	}
 	
 	public void mouseEntered(MouseEvent arg0) {
@@ -57,9 +63,15 @@ public class Plateau extends JPanel implements MouseListener, MouseMotionListene
 			this.lastX=e.getX();
 			this.lastY=e.getY();
 		}
+		else if (SwingUtilities.isMiddleMouseButton(e)) {
+	    	repaint();
+	    	//this.dessin=new Trait[MAXTAILLE];
+	    	this.indexDessin=0;
+		}
 	}
 	public void mouseReleased(MouseEvent e) {
 		PopupMenu pm = new PopupMenu();
+		System.out.println("mouse released Plateau");
 	}
 	public void mouseDragged(MouseEvent e) {
 		if(this.indexDessin<MAXTAILLE){
