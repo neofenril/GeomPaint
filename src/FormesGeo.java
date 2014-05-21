@@ -32,11 +32,17 @@ public abstract class FormesGeo {
 	{
 		points.get(index).setX(p.getX());
 		points.get(index).setY(p.getY());
+		setChanged();
+		notifyObservers();
+		
+		
 	}
 	
 	public void ajouterPoint(Point p)
 	{
 		points.add(p);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public ArrayList<Point> getPoints()

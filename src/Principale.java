@@ -13,7 +13,9 @@ import javax.swing.UIManager.*;
  */
 public class Principale{
 
-	public static void main(String[] args){			
+	public static void main(String[] args){		
+		
+		
 		JFrame fenetre = new JFrame("GeomPaint");
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    fenetre.setResizable(false);

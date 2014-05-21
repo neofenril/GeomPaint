@@ -1,3 +1,10 @@
+Salut max, c'est arthur, pour continuer ma partie j'aurais besoin des methodes du MVC (setChanged();notifyObservers();) par exemple
+Alors si tu pouvais faire ca, ce serai cool comme ca avec yohann demain on se voit pour essayer d'afficher au moin le rectangle.
+Et on pourra alors faire les reste lorsque nous serons ensemble de 17h.
+Donc en gros ce que je te demande de faire c'est de faire les methodes utiles du MVC qui permettront le dialogue entre ma partie et le Jpanel.
+Ce serais top , pas besoin de faire l'affichage d'un rectangle pour toi alors, on s'en occupe demain !! bonne soirée!
+
+
 Date de dépôt du projet :
 23/05/2014 à midi
 
