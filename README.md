@@ -16,3 +16,5 @@ RESTE A FAIRE :
 
 phase de tests
 Ergonomie : ajouter bouton annuler/refaire
+
+Modif pour François
