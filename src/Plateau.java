@@ -1,23 +1,35 @@
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.PopupMenu;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-public class Plateau extends JPanel implements MouseListener{
+public class Plateau extends JPanel implements MouseListener, MouseMotionListener{
+	private final static int MAXTAILLE=10000;	
 	private Menu menu;
-	
-	    
+    private int x,y;
+    private Color couleur;
+    private int lastX,lastY;
+    private ArrayList dessin;
+    private int indexDessin;
+
 	
 	public Plateau(Menu m){
+		this.couleur=Color.black;
+		this.dessin=new ArrayList();
+		this.indexDessin=0;
 		setPreferredSize(new Dimension(710,350));
 		menu = m;
-		
-		addMouseListener(this);	
+		addMouseListener(this);
+    	addMouseMotionListener(this);
 	}
-	
 	
 	public void mouseEntered(MouseEvent arg0) {
 		System.out.println(menu.getCursor());
@@ -38,11 +50,32 @@ public class Plateau extends JPanel implements MouseListener{
 	
 	
 	
-	public void mouseClicked(MouseEvent arg0) {}
-	public void mouseExited(MouseEvent arg0) {}
-	public void mousePressed(MouseEvent arg0) {}
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			this.lastX=e.getX();
+			this.lastY=e.getY();
+		}
+	}
+	public void mouseReleased(MouseEvent e) {
 		PopupMenu pm = new PopupMenu();
 	}
-
+	public void mouseDragged(MouseEvent e) {
+		if(this.indexDessin<MAXTAILLE){
+			this.x=e.getX();
+			this.y=e.getY();
+			Graphics g=getGraphics();
+	    	g.setColor(couleur);
+			//this.dessin[indexDessin]=new Trait(lastX,lastY,x,y,couleur);
+			this.indexDessin++;
+	    	g.drawLine(x,y,lastX,lastY);
+			this.lastX=e.getX();
+			this.lastY=e.getY();
+			System.out.print(lastX+" "+lastY);
+		}
+	}
+	public void mouseMoved(MouseEvent e){
+		
+	}
 }

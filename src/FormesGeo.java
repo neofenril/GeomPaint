@@ -2,10 +2,11 @@
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public abstract class FormesGeo {
+public abstract class FormesGeo extends Observable{
 
-	private ArrayList<Point> points;
+	private ArrayList<Point> points;//tableau des points composant une figure géométrique
 	private boolean selected;
 	private int couleurRemplissage; //Couleur des bordures
 	private int couleurContour; //Couleur de remplissage
@@ -34,8 +35,6 @@ public abstract class FormesGeo {
 		points.get(index).setY(p.getY());
 		setChanged();
 		notifyObservers();
-		
-		
 	}
 	
 	public void ajouterPoint(Point p)
@@ -53,11 +52,15 @@ public abstract class FormesGeo {
 	public void selected()
 	{
 		selected = true;
+		setChanged();//une forme géométrique sélectionnée doit être différentiable des autres formes
+		notifyObservers();
 	}
 	
 	public void unSelected()
 	{
 		selected = false;
+		setChanged();//les formes non sélectionnées doivent être différentiable des autres formes
+		notifyObservers();
 	}
 	
 	public boolean isSelected()
@@ -68,11 +71,15 @@ public abstract class FormesGeo {
 	public void setCouleurRemplissage(int rgba)
 	{
 		couleurRemplissage = rgba;
+		setChanged();//MAJ de l'affichage nécessaire à tout changement de remplissage
+		notifyObservers();
 	}
 	
 	public void setCouleurContour(int rgba)
 	{
 		couleurContour = rgba;
+		setChanged();//MAJ de l'affichage nécessaire à tout changement de contour
+		notifyObservers();
 	}
 	
 	public int getCouleurRemplissage()
