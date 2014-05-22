@@ -34,7 +34,7 @@ public class Menu extends JPanel implements Observer{//VUE
 		String[] labelImage={"Retour","Refaire","Rectangle","Cercle","Triangle","Polygone","Move","Resize"};
 		String[] commentaire={"Retour","Refaire","Dessiner un Rectangle","Dessiner un Cercle","Dessiner un Triangle","Dessiner un Polygone","Deplacer","Redimensionner"};
 		for(int i=0;i<8;i++){
-			bouton[i]=(Bouton)this.add(new Bouton(new ImageIcon("../image/"+labelImage[i]+".png"), labelImage[i]));
+			bouton[i]=(Bouton)this.add(new Bouton(new ImageIcon("image/"+labelImage[i]+".png"), labelImage[i]));
 			bouton[i].setBackground(new Color(255, 255, 255));
 			bouton[i].setToolTipText(commentaire[i]);
 		}

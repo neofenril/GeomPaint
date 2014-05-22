@@ -19,9 +19,10 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
     private int x,y;
     private FormesGeo o;
     private Color couleur;
-    private int lastX,lastY;
+    private int lastX,lastY,oriX,oriY,h,l;
     private ArrayList dessin;
     private int indexDessin;
+    
 
 	
 	public Plateau(Menu m){
@@ -29,7 +30,7 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		this.dessin=new ArrayList();
 		this.indexDessin=0;
 		this.o=new FormesGeo();
-		setPreferredSize(new Dimension(710,350));
+		setPreferredSize(new Dimension(710,455));
 		menu = m;
 		addMouseListener(this);
     	addMouseMotionListener(this);
@@ -69,8 +70,8 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 			this.lastX=e.getX();
 			this.lastY=e.getY();
 			Graphics g=getGraphics();
-			if(!menu.getDeplace()||!menu.getRedim())
-				g.drawRect(lastX-1,lastY-1,2,2);
+			//if(!menu.getDeplace()||!menu.getRedim())
+				//g.drawRect(lastX-1,lastY-1,2,2);
 			
 		}
 		else if (SwingUtilities.isMiddleMouseButton(e)) {
@@ -80,20 +81,36 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		}
 	}
 	public void mouseReleased(MouseEvent e) {
-		PopupMenu pm = new PopupMenu();
+		this.x=e.getX();
+		this.y=e.getY();
 		System.out.println("mouse released Plateau");
+		Graphics g=getGraphics();
+    	g.setColor(couleur);
+    	if(lastX<x){
+    		l = x-lastX;
+    		oriX = lastX;
+    	}
+    	else{
+    		l = lastX-x;
+    		oriX = x;
+    	}
+    	if(lastY<y){
+    		h = y-lastY;
+    		oriY = lastY;
+    	}
+    	else{
+    		h = lastY-y;
+    		oriY = y;
+    	}
+    	g.drawRect(oriX,oriY,l,h);
+		
 	}
 	public void mouseDragged(MouseEvent e) {
 		if(this.indexDessin<MAXTAILLE){
-			this.x=e.getX();
-			this.y=e.getY();
 			Graphics g=getGraphics();
 	    	g.setColor(couleur);
 			//this.dessin[indexDessin]=new Trait(lastX,lastY,x,y,couleur);
 			this.indexDessin++;
-	    	g.drawLine(x,y,lastX,lastY);
-			this.lastX=e.getX();
-			this.lastY=e.getY();
 			System.out.print(lastX+" "+lastY);
 		}
 	}

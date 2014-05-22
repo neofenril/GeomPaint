@@ -11,7 +11,7 @@ import javax.swing.*;
 public class GeomPaint extends JPanel{//CONTROLEUR
 	private FormesGeo figure;
 	
-	private ArrayList Dessin;
+	private ArrayList<Object> Dessin;
 	private final Plateau plateau;
 	private final Menu menu;
 	
@@ -63,14 +63,14 @@ public class GeomPaint extends JPanel{//CONTROLEUR
 	
 	public void update(Observable o,Object arg1){
 		
-		//Dessin.set(Dessin.size(),o);
+		Dessin.set(Dessin.size(),o);
 		System.out.println("update !!!");
 		repaint();
 	}
 	public void paint(Graphics g){
 		super.paint(g);
-		if(Dessin.size()>0){
-			//g.drawOval(0, 0, ((Cercle)Dessin.get(Dessin.size()-1)).getTaille(), ((Cercle)Dessin.get(Dessin.size()-1)).getTaille());
+		if(Dessin.size()<0){
+			g.drawOval(0, 0, ((Cercle)Dessin.get(Dessin.size()-1)).getRay(), ((Cercle)Dessin.get(Dessin.size()-1)).getRay());
 		}
 	}
 }
