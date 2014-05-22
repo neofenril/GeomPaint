@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
-public class Rectangle extends FormesGeo{
+public class Rectangle extends FormesGeo{//MODELE hérite de Observable
 
 	public Rectangle(Point p1, Point p2)
 	{
@@ -10,7 +10,6 @@ public class Rectangle extends FormesGeo{
 		ajouterPoint(p1);
 		ajouterPoint(p2);
 	}
-	
 	public Point getP1()
 	{
 		return getPoints().get(0);

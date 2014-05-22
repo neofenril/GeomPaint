@@ -6,13 +6,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 
-public class Menu extends JPanel {
+public class Menu extends JPanel implements Observer{//VUE
 	private Bouton[] bouton = new Bouton[tailleMenu];
 	private static final int tailleMenu = 10;
 	private static Object o;
@@ -154,5 +156,8 @@ public class Menu extends JPanel {
 	
 	public void setCouleur(Color c){
 		couleur = c;
+	}
+	public void update(Observable arg0, Object o){
+		System.out.println("update menu");
 	}
 }

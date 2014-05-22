@@ -8,8 +8,8 @@ import java.util.Observable;
 
 import javax.swing.*;
 
-public class GeomPaint extends JPanel {
-	private Object figure;
+public class GeomPaint extends JPanel{//CONTROLEUR
+	private FormesGeo figure;
 	
 	private ArrayList Dessin;
 	private final Plateau plateau;
@@ -62,6 +62,7 @@ public class GeomPaint extends JPanel {
 	}	
 	
 	public void update(Observable o,Object arg1){
+		
 		//Dessin.set(Dessin.size(),o);
 		System.out.println("update !!!");
 		repaint();

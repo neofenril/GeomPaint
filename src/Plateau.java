@@ -13,10 +13,11 @@ import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Plateau extends JPanel implements Observer, MouseListener, MouseMotionListener{
+public class Plateau extends JPanel implements Observer, MouseListener, MouseMotionListener{//VUE
 	private final static int MAXTAILLE=10000;	
 	private Menu menu;
     private int x,y;
+    private FormesGeo o;
     private Color couleur;
     private int lastX,lastY;
     private ArrayList dessin;
@@ -27,6 +28,7 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		this.couleur=Color.black;
 		this.dessin=new ArrayList();
 		this.indexDessin=0;
+		this.o=new FormesGeo();
 		setPreferredSize(new Dimension(710,350));
 		menu = m;
 		addMouseListener(this);
@@ -34,7 +36,7 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	}
 	
 	public void update(Observable arg0, Object o){
-		
+		System.out.println("update plateau");
 	}
 	
 	public void mouseEntered(MouseEvent arg0) {
@@ -60,6 +62,10 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {
 		if (SwingUtilities.isLeftMouseButton(e)) {
+			
+			o.ajouterPoint(new Point(this.lastX,this.lastY));
+				
+			
 			this.lastX=e.getX();
 			this.lastY=e.getY();
 			Graphics g=getGraphics();

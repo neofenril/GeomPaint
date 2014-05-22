@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public abstract class FormesGeo extends Observable{
+public class FormesGeo extends Observable{//MODELE
 
 	private ArrayList<Point> points;//tableau des points composant une figure géométrique
 	private boolean selected;
@@ -16,8 +16,6 @@ public abstract class FormesGeo extends Observable{
 		points = new ArrayList<Point>();
 		selected = true;
 	}
-	
-	public abstract void dessiner(Graphics g);
 	
 	public int getNbPoints()
 	{
