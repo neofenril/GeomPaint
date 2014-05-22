@@ -11,7 +11,7 @@ import javax.swing.*;
 public class GeomPaint extends JPanel{//CONTROLEUR
 	private FormesGeo figure;
 	
-	private ArrayList<Object> Dessin;
+	private static ArrayList<Object> Dessin;
 	private final Plateau plateau;
 	private final Menu menu;
 	
@@ -51,7 +51,13 @@ public class GeomPaint extends JPanel{//CONTROLEUR
 		this.add(plateau);
 	}	
 	
+	public static void addrect(Rectangle r){
+		Dessin.add(r);
+	}
 	
+	public static  ArrayList<Object> getDessin(){
+		return Dessin;
+	}
 
 	public Menu getMenu(){
 		return menu;

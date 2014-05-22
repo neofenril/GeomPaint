@@ -22,7 +22,7 @@ public class Rectangle extends FormesGeo{//MODELE hérite de Observable
 	
 	public void dessiner(Graphics g){
 		System.out.println("dessine le Rectangle Bordel !");
-		/*if(isSelected())
+		if(isSelected())
 		{
 			
 			g.setColor(Color.black);
@@ -36,7 +36,7 @@ public class Rectangle extends FormesGeo{//MODELE hérite de Observable
 		g.fillRect(getP1().getX(), getP1().getY(), getP2().getX()-getP1().getX(), getP2().getY()-getP1().getY());
 		g.setColor(new Color(getCouleurContour()));
 		g.drawRect(getP1().getX(), getP1().getY(), getP2().getX()-getP1().getX(), getP2().getY()-getP1().getY());
-		*/
+		
 	}
 	
 }

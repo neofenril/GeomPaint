@@ -160,4 +160,7 @@ public class Menu extends JPanel implements Observer{//VUE
 	public void update(Observable arg0, Object o){
 		System.out.println("update menu");
 	}
+	public int getChoix(){
+		return choix;
+	}
 }
