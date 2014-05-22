@@ -62,6 +62,10 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		if (SwingUtilities.isLeftMouseButton(e)) {
 			this.lastX=e.getX();
 			this.lastY=e.getY();
+			Graphics g=getGraphics();
+			if(!menu.getDeplace()||!menu.getRedim())
+				g.drawRect(lastX-1,lastY-1,2,2);
+			
 		}
 		else if (SwingUtilities.isMiddleMouseButton(e)) {
 	    	repaint();

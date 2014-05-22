@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class Menu extends JPanel {
 	private Bouton[] bouton = new Bouton[tailleMenu];
 	private static final int tailleMenu = 10;
+	private static Object o;
 	private static Color couleur = Color.black;
 	private static int choix = 0;
 	private static boolean deplace = false;
@@ -22,10 +23,11 @@ public class Menu extends JPanel {
 	
 	
 	public Menu(){
+		this.o=new Object();
 		setPreferredSize(new Dimension(710,35));
 		setLayout(new GridLayout(1, 10, 39, 5));
 		
-		//Définition d"un groupe de boutons radio pour ne sélectionner qu'une figure à la fois
+		//Définition d"un groupe de boutons radio pour ne sélectionner qu'une figure à dessiner à la fois
 		ButtonGroup radio=new ButtonGroup(); 
 		String[] labelImage={"Retour","Refaire","Rectangle","Cercle","Triangle","Polygone","Move","Resize"};
 		String[] commentaire={"Retour","Refaire","Dessiner un Rectangle","Dessiner un Cercle","Dessiner un Triangle","Dessiner un Polygone","Deplacer","Redimensionner"};
@@ -73,19 +75,19 @@ public class Menu extends JPanel {
 
 					case "Cercle":
 						System.out.println("Cercle");
-						bouton[2].isSelected();
+						bouton[3].isSelected();
 						choix = 3;
 						break;
 						
 					case "Triangle":
 						System.out.println("Triangle");
-						bouton[2].isSelected();
+						bouton[4].isSelected();
 						choix = 4;
 						break;
 
 					case "Polygone":
 						System.out.println("Polygone");
-						bouton[2].isSelected();
+						bouton[5].isSelected();
 						choix = 5;
 						break;
 						
