@@ -144,6 +144,7 @@ public class Menu extends JPanel implements Observer{//VUE
                 if (background != null) {
                 	bouton[9].setBackground(background);
                 	couleur = background;
+                	plateau.setCouleur(background);
                 }
             }
         };

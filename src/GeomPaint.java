@@ -157,6 +157,8 @@ public static GeomPaint getGeomPaint()
 		 
 		formeGeo.add(new Triangle(points.get(0), points.get(1), points.get(2)));
 	}
+	
+	
 
 
 

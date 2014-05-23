@@ -23,6 +23,8 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
     private static int i = 0;
     private int lastX,lastY,oriX,oriY,deuxX,deuxY,h,l;
     private int indexDessin;
+    private int index;
+    private static int numeroFig;
     
     private Object last;
     
@@ -75,6 +77,7 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {
+		
 		if (SwingUtilities.isLeftMouseButton(e)) {
 			
 			o.ajouterPoint(new Point(this.lastX,this.lastY));
@@ -92,6 +95,14 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	    	//this.dessin=new Trait[MAXTAILLE];
 	    	this.indexDessin=0;
 		}
+		
+		numeroFig = select(lastX, lastY);
+		if (numeroFig != -1){
+			
+			index = 1;
+			
+		}
+		
 	}
 	public void mouseReleased(MouseEvent e) {
 		if (SwingUtilities.isLeftMouseButton(e)) {
@@ -134,7 +145,6 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	    	case 4:
 	    		
 	    		GeomPaint.addNb();
-	    		System.out.print(GeomPaint.getGeomPaint().getNb());
 	    		GeomPaint.getGeomPaint().addPoint(new Point(x,y));
 	    		if(GeomPaint.getNb()==3){
 	    		
@@ -153,19 +163,36 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	    		GeomPaint.addNb();
 	    		GeomPaint.getGeomPaint().addPoint(new Point(x,y));
 	    		break;
+	    		
 	    	case 6:
-	    		int select = select(lastX, lastY);
-	    		if (select != -1){
-	    			FormesGeo r = GeomPaint.getGeomPaint().getFormeGeo().get(select);
-	    			int p1x = r.getP1().getX();
-	    			int p1y = r.getP1().getY();
-	    			int p2x = r.getP2().getX();
-	    			int p2y = r.getP2().getY();
-	    			dessin.set(select, new Rectangle(new Point(x-(lastX-p1x), y-(lastY-p1y)), new Point(x+(p2x-lastX), y+(p2y-lastX))));
+	    			if (index == 1){
+	    			FormesGeo r = GeomPaint.getGeomPaint().getFormeGeo().get(numeroFig);
+	    			int p1x = r.getPoints().get(0).getX();
+	    			int p1y = r.getPoints().get(0).getY();
+	    			int p2x = r.getPoints().get(1).getX();
+	    			int p2y = r.getPoints().get(1).getY();
+	    			System.out.print(numeroFig);
+	    			GeomPaint.getGeomPaint().getFormeGeo().set(numeroFig, new Rectangle(new Point(x, y), new Point(p2x-((p1x)-x),p2y-((p1y)-y))));
+	    			repaint();
+	    			index=0;
+	    			}
 	    			break;
+	    	case 7:
+	    		if (index == 1){
+	    			FormesGeo r = GeomPaint.getGeomPaint().getFormeGeo().get(numeroFig);
+	    			int p1x = r.getPoints().get(0).getX();
+	    			int p1y = r.getPoints().get(0).getY();
+	    			int p2x = r.getPoints().get(1).getX();
+	    			int p2y = r.getPoints().get(1).getY();
+	    			System.out.print("la on doit dire au rect a la place fsedibvs");
+	    			GeomPaint.getGeomPaint().getFormeGeo().set(numeroFig, new Rectangle(new Point(x, y), new Point(p2x,p2y)));
+	    			repaint();
+	    			index=0;
+	    			}	
+	    			
+	    	
 	    	
 	    	}
-	    	
 		}
 	}
 	public void mouseDragged(MouseEvent e) {
@@ -228,15 +255,18 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		int piece = -1;
 		
 		for(int j = 0; j < taille; j++){
-			GeomPaint.getGeomPaint().getFormeGeo().get(j);
-			if ((GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().getX() <= pX)&&(rect.getP1().getY() <= pY)&&(rect.getP2().getX() >= pX)&&(rect.getP2().getY() >= pY)){
+			int tailleTabl = GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().size();
+			for(int i=0; i<tailleTabl;i++){
+			if ((GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().get(i).getX() <= pX+3)&&(GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().get(i).getY() <= pY+3)&&(GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().get(i).getX() >= pX-3)&&(GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().get(i).getY() >= pY-3)){
 				piece = j;
 				System.out.println(j);
 			}
+			}
 		}	
+		System.out.println(piece);
 		return piece;
-	}
 	
+	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		int taille = GeomPaint.getGeomPaint().formeGeo.size();

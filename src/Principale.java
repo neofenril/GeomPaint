@@ -16,8 +16,7 @@ public class Principale{
 	public static void main(String[] args){	
 		
 		FormesGeo f = new FormesGeo();
-		VueGraph vg=new VueGraph();
-		f.addObserver(vg);
+	
 		
 		
 		JFrame fenetre = new JFrame("GeomPaint");
