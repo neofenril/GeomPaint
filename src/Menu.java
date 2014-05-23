@@ -111,6 +111,7 @@ public class Menu extends JPanel implements Observer{//VUE
 						choix = 6;
 						deplace = true;
 						plateau.setChoix(6);
+						plateau.setDep(true);
 						break;	
 						
 					case "Resize":
@@ -119,6 +120,7 @@ public class Menu extends JPanel implements Observer{//VUE
 						choix = 7;
 						redim = true;
 						plateau.setChoix(7);
+						plateau.setSiz(true);
 						break;
 						
 					

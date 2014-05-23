@@ -152,7 +152,17 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	    		
 	    		GeomPaint.addNb();
 	    		GeomPaint.getGeomPaint().addPoint(new Point(x,y));
-
+	    		break;
+	    	case 6:
+	    		int select = select(lastX, lastY);
+	    		if (select != -1){
+	    			FormesGeo r = GeomPaint.getGeomPaint().getFormeGeo().get(select);
+	    			int p1x = r.getP1().getX();
+	    			int p1y = r.getP1().getY();
+	    			int p2x = r.getP2().getX();
+	    			int p2y = r.getP2().getY();
+	    			dessin.set(select, new Rectangle(new Point(x-(lastX-p1x), y-(lastY-p1y)), new Point(x+(p2x-lastX), y+(p2y-lastX))));
+	    			break;
 	    	
 	    	}
 	    	
@@ -218,8 +228,8 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		int piece = -1;
 		
 		for(int j = 0; j < taille; j++){
-			Rectangle rect = (Rectangle)GeomPaint.getGeomPaint().getFormeGeo().get(j);
-			if ((rect.getP1().getX() <= pX)&&(rect.getP1().getY() <= pY)&&(rect.getP2().getX() >= pX)&&(rect.getP2().getY() >= pY)){
+			GeomPaint.getGeomPaint().getFormeGeo().get(j);
+			if ((GeomPaint.getGeomPaint().getFormeGeo().get(j).getPoints().getX() <= pX)&&(rect.getP1().getY() <= pY)&&(rect.getP2().getX() >= pX)&&(rect.getP2().getY() >= pY)){
 				piece = j;
 				System.out.println(j);
 			}

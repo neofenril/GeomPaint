@@ -1,6 +1,7 @@
 
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -90,4 +91,5 @@ public class FormesGeo extends Observable{//MODELE
 	{
 		return couleurContour;
 	}
+	
 }
