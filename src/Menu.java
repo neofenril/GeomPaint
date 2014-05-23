@@ -22,9 +22,11 @@ public class Menu extends JPanel implements Observer{//VUE
 	private static int choix = 0;
 	private static boolean deplace = false;
 	private static boolean redim = false;
+	private Plateau plateau;
 	
 	
-	public Menu(){
+	public Menu(Plateau p){
+		plateau = p;
 		this.o=new Object();
 		setPreferredSize(new Dimension(710,35));
 		setLayout(new GridLayout(1, 10, 39, 5));
@@ -51,46 +53,56 @@ public class Menu extends JPanel implements Observer{//VUE
 				if (deplace == true){
 					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					deplace = false;
+					plateau.setDep(false);
 				}
 				
 				if (redim == true){
 					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					redim = false;
+					plateau.setSiz(false);
 				}
 				
 				switch (selection){
 					case "Retour":
 						System.out.println("Retour");
 						choix = 0;
+						plateau.setChoix(0);
+						plateau.retour();
 						break;
 						
 					case "Refaire":
 						System.out.println("Refaire");
 						choix = 1;
+						plateau.setChoix(1);
+						plateau.avance();
 						break;
 						
 					case "Rectangle":
 						System.out.println("Rectangle");
 						bouton[2].isSelected();
 						choix = 2;
+						plateau.setChoix(2);
 						break;
 
 					case "Cercle":
 						System.out.println("Cercle");
 						bouton[3].isSelected();
 						choix = 3;
+						plateau.setChoix(3);
 						break;
 						
 					case "Triangle":
 						System.out.println("Triangle");
 						bouton[4].isSelected();
 						choix = 4;
+						plateau.setChoix(4);
 						break;
 
 					case "Polygone":
 						System.out.println("Polygone");
 						bouton[5].isSelected();
 						choix = 5;
+						plateau.setChoix(5);
 						break;
 						
 					case "Move":
@@ -98,6 +110,7 @@ public class Menu extends JPanel implements Observer{//VUE
 						setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 						choix = 6;
 						deplace = true;
+						plateau.setChoix(6);
 						break;	
 						
 					case "Resize":
@@ -105,6 +118,7 @@ public class Menu extends JPanel implements Observer{//VUE
 						setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 						choix = 7;
 						redim = true;
+						plateau.setChoix(7);
 						break;
 						
 					

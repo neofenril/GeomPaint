@@ -16,7 +16,8 @@ public class FormesGeo extends Observable{//MODELE
 		points = new ArrayList<Point>();
 		selected = true;
 	}
-	
+	public  void dessiner(Graphics g) {
+	}
 	public int getNbPoints()
 	{
 		return points.size();

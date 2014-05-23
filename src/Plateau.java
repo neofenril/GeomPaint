@@ -15,26 +15,31 @@ import javax.swing.SwingUtilities;
 
 public class Plateau extends JPanel implements Observer, MouseListener, MouseMotionListener{//VUE
 	private final static int MAXTAILLE=10000;	
-	private Menu menu;
     private int x,y;
     private FormesGeo o;
-    private Color couleur;
+    private static Color couleur;
     private int hauteur,largeur;
     private int[] tab = new int[MAXTAILLE];
     private static int i = 0;
     private int lastX,lastY,oriX,oriY,deuxX,deuxY,h,l;
-    private ArrayList<Object> dessin;
     private int indexDessin;
+    
+    private Object last;
+    
+    private static boolean dep = false;
+    private static boolean siz = false;
+    private static int choix = 0;
+    private static int nbForme = 0;
+    
+    
     
 
 	
-	public Plateau(Menu m){
+	public Plateau(){
 		this.couleur=Color.black;
-		this.dessin=new ArrayList<Object>();
 		this.indexDessin=0;
 		this.o=new FormesGeo();
 		setPreferredSize(new Dimension(710,455));
-		menu = m;
 		addMouseListener(this);
     	addMouseMotionListener(this);
 	}
@@ -43,11 +48,12 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		System.out.println("update plateau");
 	}
 	
+	public static Color getcoul(){
+		return couleur;
+	}
+	
 	public void mouseEntered(MouseEvent arg0) {
-		System.out.println(menu.getCursor());
-		boolean dep = menu.getDeplace();
 		System.out.println(dep);
-		boolean siz = menu.getRedim();
 		System.out.println(siz);
 		if(dep == true){
 			setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
@@ -62,7 +68,11 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	
 	
 	
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		
+		
+		
+	}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {
 		if (SwingUtilities.isLeftMouseButton(e)) {
@@ -89,8 +99,8 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 			this.y=e.getY();
 			System.out.println("mouse released Plateau");
 			Graphics g=getGraphics();
-	    	g.setColor(couleur);
-	    	switch(menu.getChoix()){
+	    	GeomPaint.setColor(couleur);
+	    	switch(choix){
 	    	case 2:
 	    		if(lastX<x){
 		    		//l = x-lastX;
@@ -112,30 +122,38 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 		    		deuxY = lastY;
 		    		oriY = y;
 		    	}
-		    	dessin.add(new Rectangle(new Point(oriX, oriY), new Point(deuxX, deuxY)));
+		    	GeomPaint.getGeomPaint().formeGeo.add(new Rectangle(new Point(oriX, oriY), new Point(deuxX, deuxY)));
 		    	//g.fillRect(oriX,oriY,l,h);
 		    	repaint();
 		    	break;
-	    	/*case 3:
-	    		if(lastX<x){
-		    		l = x-lastX;
-		    		oriX = lastX;
-		    	}
-		    	else{
-		    		l = lastX-x;
-		    		oriX = x;
-		    	}
-		    	if(lastY<y){
-		    		h = y-lastY;
-		    		oriY = lastY;
-		    	}
-		    	else{
-		    		h = lastY-y;
-		    		oriY = y;
-		    	}
-	    		g.fillOval(oriX, oriY, l, h);
+	    	case 3:
+	    		
+		    	GeomPaint.getGeomPaint().formeGeo.add(new Cercle(new Point(lastX, lastY), new Point(x, y)));
+		    	repaint();
 	    		break;
-	    	*/
+	    	case 4:
+	    		
+	    		GeomPaint.addNb();
+	    		System.out.print(GeomPaint.getGeomPaint().getNb());
+	    		GeomPaint.getGeomPaint().addPoint(new Point(x,y));
+	    		if(GeomPaint.getNb()==3){
+	    		
+	    			System.out.print("on rentre dans la boucle ");
+	    			//GeomPaint.getGeomPaint().formeGeo.add(new Triangle(new Point(lastX, lastY), new Point(x, y), new Point(5,5)));
+	    			GeomPaint.getGeomPaint().creerTriangle();
+	    			
+	    			GeomPaint.razNb();
+	    			GeomPaint.razPoints();
+	    		
+	    		}
+	    		repaint();
+	    		break;
+	    	case 5:
+	    		
+	    		GeomPaint.addNb();
+	    		GeomPaint.getGeomPaint().addPoint(new Point(x,y));
+
+	    	
 	    	}
 	    	
 		}
@@ -159,18 +177,65 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 	public void mouseMoved(MouseEvent e){
 		
 	}
+	public void setDep(boolean b){
+		dep = b;
+	}
+	
+	public void setSiz(boolean b){
+		siz = b;
+	}
+	
+	public void setChoix(int i){
+		choix = i;
+	}
+	
+	public void setCouleur(Color c){
+		couleur = c;
+	}
+	
+	public ArrayList<FormesGeo> getDessin(){
+		return GeomPaint.getGeomPaint().getFormeGeo();
+	}
+	
+	public int getNbforme(){
+		return nbForme;
+	}
+	public void retour(){
+		last = GeomPaint.getGeomPaint().getFormeGeo().get(GeomPaint.getGeomPaint().getFormeGeo().size()-1);
+		GeomPaint.getGeomPaint().getFormeGeo().remove(GeomPaint.getGeomPaint().getFormeGeo().size()-1);
+		repaint();
+	}
+	
+	public void avance(){
+		GeomPaint.getGeomPaint().getFormeGeo().add((FormesGeo) last);
+		repaint();
+	}
+	
+	public int select(int x, int y){
+		int pX = x;
+		int pY = y;
+		int taille = GeomPaint.getGeomPaint().getFormeGeo().size();
+		int piece = -1;
+		
+		for(int j = 0; j < taille; j++){
+			Rectangle rect = (Rectangle)GeomPaint.getGeomPaint().getFormeGeo().get(j);
+			if ((rect.getP1().getX() <= pX)&&(rect.getP1().getY() <= pY)&&(rect.getP2().getX() >= pX)&&(rect.getP2().getY() >= pY)){
+				piece = j;
+				System.out.println(j);
+			}
+		}	
+		return piece;
+	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		int taille = dessin.size();
+		int taille = GeomPaint.getGeomPaint().formeGeo.size();
 		for(int j = 0; j < taille; j++){
-			couleur = menu.getCouleur();
-			g.setColor(couleur);
 			
-			switch(menu.getChoix()){
-			case 2:
-				Rectangle rect = (Rectangle)dessin.get(j);
-				rect.dessiner(g);
+			
+			GeomPaint.getGeomPaint().getFormeGeo().get(j).dessiner(g);
+				
+				
 				/*
 				Point a = rect.getP1();
 				Point b = rect.getP2();
@@ -179,7 +244,7 @@ public class Plateau extends JPanel implements Observer, MouseListener, MouseMot
 				g.drawRect(a.getX(), a.getY(), l, h);
 				*/
 			}
-		}	
+			
 	}
 	
 }

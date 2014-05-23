@@ -30,6 +30,11 @@ public class Cercle extends FormesGeo{
 	}
 	public void dessiner(Graphics g)
 	{
+		g.setColor(Color.black);
+		for(int i = 0; i < getPoints().size(); i++)
+		{
+			g.drawRect(getPoints().get(i).getX()-5, getPoints().get(i).getY()-5, 10, 10);
+		}
 		g.setColor(new Color(getCouleurRemplissage(),true));
 		rayon = (int)Math.sqrt((getP1().getY()-getP2().getY())*(getP1().getY()-getP2().getY())+(getP1().getX()-getP2().getX())*(getP1().getX()-getP2().getX()));
 		g.fillOval((int)(getP1().getX()-rayon), (int)(getP1().getY()-rayon), (int)(rayon*2), (int)(rayon*2));

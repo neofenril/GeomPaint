@@ -9,23 +9,60 @@ import java.util.Observable;
 import javax.swing.*;
 
 public class GeomPaint extends JPanel{//CONTROLEUR
+	private static GeomPaint instance = null;
 	private FormesGeo figure;
+	static ArrayList<FormesGeo> formeGeo;
+	static ArrayList<Point> points;
+	private ArrayList Dessin;
+	private  Plateau plateau;
+	private  Menu menu;
+	private static int nbPoints;
+	private static int nb;
+	private static Color couleurForme;
 	
-	private static ArrayList<Object> Dessin;
-	private final Plateau plateau;
-	private final Menu menu;
 	
 	private JPopupMenu jpm = new JPopupMenu();
 	private JMenu couleur = new JMenu("Couleur");
 
 	private JMenuItem effacer = new JMenuItem("Effacer");      
 	
+
+////////////////////////////
+	
+	
+
+
+private int forme;
+public GeomPaint()
+{
+
+points = new ArrayList<Point>();
+formeGeo = new ArrayList<FormesGeo>();
+forme = 0;
+nbPoints = 0;
+nb = 0;
+couleurForme = Color.black;
+
+}
+
+public static GeomPaint getGeomPaint()
+{
+	if(instance == null)
+		instance = new GeomPaint();
+	return instance;
+}
+
+/////////////////////////////
+
+	
+	
 	public GeomPaint(Object o){
 		Dessin=new ArrayList();
 		Dessin.add(0, o);
 		
-		menu = new Menu();
-		plateau = new Plateau(menu);
+		plateau = new Plateau();
+		menu = new Menu(plateau);
+		
 		
 		plateau.addMouseListener(new MouseAdapter(){
 		      public void mouseReleased(MouseEvent event){
@@ -51,12 +88,12 @@ public class GeomPaint extends JPanel{//CONTROLEUR
 		this.add(plateau);
 	}	
 	
-	public static void addrect(Rectangle r){
-		Dessin.add(r);
+	public static void setColor(Color c){
+		couleurForme = c;
 	}
 	
-	public static  ArrayList<Object> getDessin(){
-		return Dessin;
+	public static Color getColor(){
+		return couleurForme;
 	}
 
 	public Menu getMenu(){
@@ -69,14 +106,62 @@ public class GeomPaint extends JPanel{//CONTROLEUR
 	
 	public void update(Observable o,Object arg1){
 		
-		Dessin.set(Dessin.size(),o);
+		//Dessin.set(Dessin.size(),o);
 		System.out.println("update !!!");
 		repaint();
 	}
+	
+	public static void razPoints()
+	{
+		points.clear();
+		nbPoints = 0;
+	}
+	
+	public ArrayList<Point> getPoints()
+	{
+		return points;
+	}
+	
+	public void addPoint(Point p)
+	{
+		points.add(p);
+		nbPoints++;
+	}
+	public static void addNb()
+	{
+		nb++;
+	}
+	
+	public static int getNb()
+	{
+		return nb;
+	}
+	
+	public static void razNb()
+	{
+		nb = 0;
+	}
+	
+	
+	
+	
 	public void paint(Graphics g){
 		super.paint(g);
-		if(Dessin.size()<0){
-			g.drawOval(0, 0, ((Cercle)Dessin.get(Dessin.size()-1)).getRay(), ((Cercle)Dessin.get(Dessin.size()-1)).getRay());
+		if(Dessin.size()>0){
+			//g.drawOval(0, 0, ((Cercle)Dessin.get(Dessin.size()-1)).getTaille(), ((Cercle)Dessin.get(Dessin.size()-1)).getTaille());
 		}
+	}
+	
+	public void creerTriangle()
+	{
+		 
+		formeGeo.add(new Triangle(points.get(0), points.get(1), points.get(2)));
+	}
+
+
+
+	public static ArrayList<FormesGeo> getFormeGeo() {
+		// TODO Auto-generated method stub
+		return formeGeo;
 	}
 }
